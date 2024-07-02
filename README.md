@@ -1,11 +1,11 @@
-# React + TypeScript + Vite
+# Firebase
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## hosting
 
-Currently, two official plugins are available:
+for all firebase operations make sure to have firebase CLI installed and set up
+to update the hosted page run `yarn build`, then `firebase deploy`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+see [this page](https://vitejs.dev/guide/static-deploy.html#google-firebase) for more details
 
 ## Expanding the ESLint configuration
 
