@@ -1,0 +1,51 @@
+<svg 
+    viewBox="104.623 8.828 1068.713 1255.8669" 
+    width="1068.713" 
+    height="1255.8669" 
+    xmlns="http://www.w3.org/2000/svg">
+
+  <path 
+    d="M 641.061 8.828 L 1173.336 350.811 L 1170.359 923.807 L 640.034 1264.695 L 104.623 920.696 L 105.056 352.793 L 641.061 8.828 Z M 641.044 11.542 L 107.782 354.259 L 106.073 919.709 L 640.019 1263.418 L 1169.032 923.117 L 1170.898 352.202 L 641.044 11.542 Z" 
+    fill="#010101"/>
+
+  <polygon 
+    style="fill: #eee; fill-opacity: 0.2; stroke: #000; stroke-width: 5;"
+    points="112.437 353.968 639.275 15.304 638.109 339.402"/>
+
+  <polygon 
+    style="fill: #eee; fill-opacity: 0.5; stroke: #000; stroke-width: 5;"
+    points="112.018 356.919 637.545 342.8 312.232 896.171"/>
+
+  <polygon 
+    style="fill: #eee; fill-opacity: 0.2; stroke: #000; stroke-width: 5;"
+    points="108.352 917.83 308.45 898.306 109.734 358.027"/>
+
+  <polygon 
+    style="fill: #eee; fill-opacity: 0.9; stroke: #000; stroke-width: 5;"
+    points="640.22 345.256 316.233 897.584 961.966 898.674"/>
+
+  <polygon
+    style="fill: #eee; fill-opacity: 0.2; stroke: #000; stroke-width: 5;"
+    points="641.747 339.897 1167.339 352.335 642.862 15.408"/>
+
+  <polygon 
+    style="fill: #eee; fill-opacity: 0.5; stroke: #000; stroke-width: 5;"
+    points="642.779 342.946 964.896 897.303 1167.914 355.163"/>
+
+  <polygon 
+    style="fill: #eee; fill-opacity: 0.2; stroke: #000; stroke-width: 5;"
+    points="967.916 899.44 1166.85 920.168 1169.317 357.931"/>
+
+  <polygon 
+    style="fill: #eee; fill-opacity: 0.5; stroke: #000; stroke-width: 5;"
+    points="315.619 902.02 961.985 902.221 640.069 1259.639"/>
+
+  <polygon 
+    style="fill: #eee; fill-opacity: 0.2; stroke: #000; stroke-width: 5;"
+    points="641.847 1260.79 1164.713 923.398 966.567 902.921"/>
+
+  <polygon 
+    style="fill: #eee; fill-opacity: 0.2; stroke: #000; stroke-width: 5;"
+    points="310.845 902.022 110.562 920.167 638.339 1260.738"/>
+
+</svg>
