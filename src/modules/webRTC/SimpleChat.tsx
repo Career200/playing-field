@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box } from "../components/Box";
 import { ShouldRender } from "../components/ShouldRender";
 import { Answerings } from "./Answerings";
@@ -17,8 +17,12 @@ const sidebarButtonProps: React.CSSProperties = {
 
 export const WebRTCChat = () => {
     const [page, setPage] = useState<string>("chat");
-    const newPeerConnection = new webRTC_connection();
-
+    const [actualPeerConnection, setActualPeerConnection] = useState<webRTC_connection>();
+    
+    useEffect(() => {
+        const newPeerConnection = new webRTC_connection();
+        setActualPeerConnection(newPeerConnection);
+    }, [])
 
     return (
         <Box
@@ -44,14 +48,14 @@ export const WebRTCChat = () => {
                 border="4px solid"
             >
                 <ShouldRender shouldRender={page === "offerings"}>
-                    <Offerings webRTCConnection={newPeerConnection} />
+                    <Offerings webRTCConnection={actualPeerConnection} />
                 </ShouldRender>
 
                 <ShouldRender shouldRender={page === "answerings"}>
-                    <Answerings webRTCConnection={newPeerConnection} />
+                    <Answerings webRTCConnection={actualPeerConnection} />
                 </ShouldRender> 
 
-                <ChatBox webRTCConnection={newPeerConnection} />
+                <ChatBox webRTCConnection={actualPeerConnection} />
             </Box>
         </Box>
     );

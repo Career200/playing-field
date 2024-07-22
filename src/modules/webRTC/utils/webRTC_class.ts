@@ -148,24 +148,25 @@ export class webRTC_connection {
 
         this.peerConnection.ondatachannel = this.handleDataChannel;
 
+         console.log("dataChannel", this.dataChannel)
         try {
-            this.peerConnection.setRemoteDescription(offer);
+            await this.peerConnection.setRemoteDescription(offer);
             return this.setRemoteDone();
         } catch (error) {
             return this.setRemoteFailed(error);
         }
     };
 
-    handleDataChannel(event: any) {
+    handleDataChannel = (event: any) => {
         console.log('handledatachannel', event);
-        
+
         this.dataChannel = event.channel;
-        
+    
         if (!this.dataChannel) return false;
 
         this.dataChannel.onopen = dataChannelOpen;
         this.dataChannel.onmessage = dataChannelMessage;
-        console.log("chanel handled")
+        console.log("chanel handled", this.dataChannel)
     };
 
     handleAnswer = async (answer: any) => {
@@ -179,13 +180,5 @@ export class webRTC_connection {
             return this.setRemoteFailed(error);
         }
     };
- 
-    pasteMessage = (message: string) => {
-        console.log(this.dataChannel)
-        if (!this.dataChannel) return false;
-
-        this.dataChannel!.send(message);
-        return true;
-    }
 
 }

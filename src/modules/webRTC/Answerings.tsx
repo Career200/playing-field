@@ -7,7 +7,7 @@ import { webRTC_connection } from "./utils/webRTC_class";
 import { Loader } from "../components/Loader";
 
 type Props = {
-    webRTCConnection: webRTC_connection;
+    webRTCConnection: webRTC_connection | undefined;
     remoteDescription?: string;
     setRemoteDescription?: React.Dispatch<React.SetStateAction<string>>;  
     localDescription?: string; 
@@ -20,6 +20,7 @@ export const Answerings = ({ webRTCConnection }: Props) => {
     const textAreaOffer = useRef<HTMLTextAreaElement>(null);
     const textAreaAnswer = useRef<HTMLTextAreaElement>(null);
     const buttonOfferPasted = useRef<HTMLButtonElement>(null);
+    const buttonCompleted = useRef<HTMLButtonElement>(null);
 
     const [showAnswer, setShowAnswer] = useState<boolean>(false);
     const [answerLoading, setAnswerLoading] = useState<boolean>(false);
@@ -32,7 +33,7 @@ export const Answerings = ({ webRTCConnection }: Props) => {
         if (!offerObject) return;
         const offer = JSON.parse(offerObject);
 
-        const offerHandleed = await webRTCConnection.handleOffer(lastIceCandidate, offer);
+        const offerHandleed = await webRTCConnection?.handleOffer(lastIceCandidate, offer);
         if (!offerHandleed) return;
 
         buttonOfferPasted.current!.disabled = true;
@@ -54,6 +55,15 @@ export const Answerings = ({ webRTCConnection }: Props) => {
         setAnswerLoading(false)
         console.log("Offer Processed");
       }
+
+      const clickCompleted = async () => {
+        console.log('Completed');
+
+        console.log(webRTCConnection?.dataChannel)
+        //const answerDone = await webRTCConnection.handleAnswer(answerText);
+        //if (!answerDone) return;
+      }
+
     return (
         <Box flexDirection="column" justifyContent="center">
             answering to a connection offer from a peer
@@ -73,6 +83,12 @@ export const Answerings = ({ webRTCConnection }: Props) => {
                         value={answerText}
                         placeholder="please wait a few seconds" 
                         ref={textAreaAnswer}/>
+
+                        <Button 
+                            id="buttonanswerpasted" 
+                            onClick={clickCompleted}
+                            ref={buttonCompleted}
+                        >completed</Button>
                 </Box>
 
             </ShouldRender>  

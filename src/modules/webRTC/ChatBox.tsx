@@ -5,7 +5,7 @@ import { chatlog } from "./utils/chatlog";
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";
 
-export const ChatBox = ({ webRTCConnection }: { webRTCConnection: webRTC_connection, dataChannel?: RTCDataChannel | undefined }) => {
+export const ChatBox = ({ webRTCConnection }: { webRTCConnection: webRTC_connection | undefined }) => {
 
     const chatLogRef = useRef<HTMLDivElement>(null);
     const chatInputRef = useRef<HTMLInputElement>(null);
@@ -17,16 +17,12 @@ export const ChatBox = ({ webRTCConnection }: { webRTCConnection: webRTC_connect
 
         if (!text) return;
 
-        
-        //const messageSent = webRTCConnection.pasteMessage(text);
+        console.log(webRTCConnection?.peerConnection, webRTCConnection?.dataChannel)
 
         try {
-            webRTCConnection.dataChannel!.send(text);
+            webRTCConnection!.dataChannel!.send(text);
             chatlog(text);
         } catch (error) {
-        //if (messageSent) {
-            
-        //} else {
             chatlog(text + "(is not sent)");
         };
         

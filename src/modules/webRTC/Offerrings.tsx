@@ -7,7 +7,7 @@ import { Loader } from "../components/Loader";
 import { webRTC_connection } from "./utils/webRTC_class";
 
 type Props = {
-    webRTCConnection: webRTC_connection;
+    webRTCConnection: webRTC_connection | undefined;
     remoteDescription?: string;
     setRemoteDescription?: React.Dispatch<React.SetStateAction<string>>;  
     localDescription?: string; 
@@ -32,7 +32,7 @@ export const Offerings = ({ webRTCConnection }: Props) => {
     const createOffer = async () => {
         console.log('create Offer');   
         
-        const offerCreated = await webRTCConnection.createOffer(lastIceCandidate);
+        const offerCreated = await webRTCConnection?.createOffer(lastIceCandidate);
 
         if (!offerCreated) return;
 
@@ -61,7 +61,7 @@ export const Offerings = ({ webRTCConnection }: Props) => {
 
         const answer = JSON.parse(textAreaAnswer.current!.value);
    
-        const answerDone = await webRTCConnection.handleAnswer(answer);
+        const answerDone = await webRTCConnection?.handleAnswer(answer);
         if (!answerDone) return;
 
         buttonAnswerPasted.current!.disabled = true;
