@@ -4,6 +4,7 @@ import { CommonElementProps } from "../types";
 
 type InputProps = {
     value?: number | string,
+    onChange?: (event: React.ChangeEvent) => void,
     type?: string,
     readOnly?: boolean,
     placeholder?: string,
@@ -14,6 +15,7 @@ export const Input = React.forwardRef(
         id, 
         disabled, 
         placeholder, 
+        onChange,
         onClick, 
         value, 
         type = "text", 
@@ -31,6 +33,7 @@ export const Input = React.forwardRef(
         aria-disabled={disabled} 
         disabled={disabled} 
         value={value} 
+        onChange={onChange}
         readOnly={readOnly} 
         placeholder={placeholder}
         ref={ref} />

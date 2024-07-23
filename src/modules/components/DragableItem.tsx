@@ -32,7 +32,6 @@ export const DraggableItem = ({ id, children, left, top, moveItem = () => {} } :
           opacity: isDragging ? 0.5 : 1,
           cursor: 'move',
           position: 'fixed',
-          transform: 'translate(-50%, -50%)',
           left,
           top,
         }}

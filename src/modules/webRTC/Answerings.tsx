@@ -41,28 +41,24 @@ export const Answerings = ({ webRTCConnection }: Props) => {
 
         setShowAnswer(false);
         setAnswerLoading(true);
-        console.log('Handle Offer Done');
-      }
+        console.info('Handle Offer Done');
+    };
 
-    const lastIceCandidate = (peerConnection: RTCPeerConnection) => {
-        console.log('Last Ice Candidate', peerConnection);
+    const lastIceCandidate = (peerConnection: RTCPeerConnection | null) => {
+        console.info('Last Ice Candidate', peerConnection);
 
-        const answer = peerConnection.localDescription
+        const answer = peerConnection?.localDescription
         setAnswerText(JSON.stringify(answer))
-        console.log(answer);
+        console.info('Answer :', answer);
 
         setShowAnswer(true)
         setAnswerLoading(false)
-        console.log("Offer Processed");
-      }
+        console.info("Offer Processed");
+    };
 
-      const clickCompleted = async () => {
-        console.log('Completed');
-
-        console.log(webRTCConnection?.dataChannel)
-        //const answerDone = await webRTCConnection.handleAnswer(answerText);
-        //if (!answerDone) return;
-      }
+    const clickCompleted = async () => {
+        console.info('Completed', webRTCConnection?.dataChannel);
+    };
 
     return (
         <Box flexDirection="column" justifyContent="center">

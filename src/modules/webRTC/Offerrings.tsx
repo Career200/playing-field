@@ -28,36 +28,33 @@ export const Offerings = ({ webRTCConnection }: Props) => {
     const [offerIsLoading, setOfferIsLoading] = useState<boolean>(false);
     const [offer, setOffer] = useState<string>("")
     
-
     const createOffer = async () => {
-        console.log('create Offer');   
+        console.info('create Offer');   
         
         const offerCreated = await webRTCConnection?.createOffer(lastIceCandidate);
-
         if (!offerCreated) return;
 
         offerButton.current!.disabled = true;
 
         setShowOffer(false)
         setOfferIsLoading(true)
-
-        console.log('Create Offer Done');
+        console.info('Create Offer Done');
     };
 
-    const lastIceCandidate = (peerConnection: RTCPeerConnection) => {
-        console.log('Last Ice Candidate', peerConnection);
+    const lastIceCandidate = (peerConnection: RTCPeerConnection | null) => {
+        console.info('Last Ice Candidate', peerConnection);
 
         const offer = peerConnection?.localDescription;
-        console.log(offer);
+        console.info("Offer ", offer);
         setOffer(JSON.stringify(offer));
 
         setShowOffer(true);
         setOfferIsLoading(false);
-        console.log("Offer Processed");
+        console.info("Offer Processed");
       }
 
     const clickAnswerPasted = async () => {
-        console.log('Answer Pasted');
+        console.info('Answer Pasted');
 
         const answer = JSON.parse(textAreaAnswer.current!.value);
    

@@ -6,7 +6,6 @@ export const DragableContainer = ({ items, setItems } : DragableContainerProps) 
   const moveItem = ({id, left = 0, top = 0}: Partial<DragableItemProps>) => {
     setItems((prevItems) =>
     {
-      console.log(left, top);
       return prevItems.map((item) =>
         item.id === id ? { ...item, left, top } : item
       )

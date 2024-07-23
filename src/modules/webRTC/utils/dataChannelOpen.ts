@@ -1,6 +1,10 @@
 import { chatlog } from "./chatlog";
 
-export const dataChannelOpen = (event: any) => {
-    console.log('datachannelopen', event);
-    chatlog('connected');
+/**
+ * just logging connection
+ * @param event 
+ */
+export const dataChannelOpen = (event: Event) => {
+    console.log('data channel opened :', event);
+    chatlog('connected', "INFO");
   }

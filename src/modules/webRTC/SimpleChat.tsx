@@ -6,17 +6,31 @@ import { ChatBox } from "./ChatBox";
 import { Offerings } from "./Offerrings";
 import { webRTC_connection } from "./utils/webRTC_class";
 import { Button } from "../components/Button";
+import { T } from "../components/Text";
+import { ChatUserPage, UserInfo } from "./ChatUserPage";
 
 const sidebarButtonProps: React.CSSProperties = {
     justifyContent: "center",
-    border: "1px solid red",
-    color: "darkgoldenrod",
+    border: "2px solid cadetblue",
+    outline: "1px solid mediumslateblue",
+    background: "lavender ",
+    color: "indianred ",
     alignItems: "center",
     borderRadius: 10,
 } 
 
+const textProps: React.CSSProperties = {
+    justifyContent: "center",
+    alignItems: "center",   
+    color: "inherit",
+    transform: "rotate(-90deg)",
+    fontSize: 14,
+    fontFamily: "sans-serif"
+} 
+
 export const WebRTCChat = () => {
-    const [page, setPage] = useState<string>("chat");
+    const [page, setPage] = useState<string>("user");
+    const [userInfo, setUserInfo] = useState<UserInfo>({ name: "John Doe" });
     const [actualPeerConnection, setActualPeerConnection] = useState<webRTC_connection>();
     
     useEffect(() => {
@@ -26,17 +40,25 @@ export const WebRTCChat = () => {
 
     return (
         <Box
-            position="fixed"
+            flexDirection="row"
             width={330}
             height="100%"
-            top={0} 
-            right={0}
-            gap={10}
+            minHeight={600}
+            gap={12}
         >
             <Box width={30} flexDirection="column" gap={10} paddingTop={10}>
-                <Button onClick={() => setPage("chat")} {...sidebarButtonProps} >C</Button>
-                <Button onClick={() => setPage("offerings")} {...sidebarButtonProps} >O</Button>
-                <Button onClick={() => setPage("answerings")} {...sidebarButtonProps} >A</Button>
+                <Button active={page === "user"} mode="switch" onClick={() => setPage("user")} {...sidebarButtonProps} >
+                    <T height={60} {...textProps}>User Page</T>
+                </Button>
+                <Button active={page === "chat"} mode="switch" onClick={() => setPage("chat")} {...sidebarButtonProps} >
+                    <T height={30} {...textProps}>Chat</T>
+                </Button>
+                <Button active={page === "offerings"} mode="switch"  onClick={() => setPage("offerings")} {...sidebarButtonProps} >
+                    <T height={60} {...textProps}>Offering</T>
+                </Button>
+                <Button active={page === "answerings"} mode="switch"  onClick={() => setPage("answerings")} {...sidebarButtonProps} >
+                    <T height={60} {...textProps}>Answering</T>
+                </Button>
             </Box>
             
             <Box 
@@ -45,8 +67,15 @@ export const WebRTCChat = () => {
                 flexDirection="column"
                 width="100%"
                 background="silver"
-                border="4px solid"
+                border = "2px solid cadetblue"
+                outline = "1px solid mediumslateblue"
+                borderRadius={10}
             >
+                <Box id="userName">{userInfo.name}</Box>
+                <ShouldRender shouldRender={page === "user"}>
+                    <ChatUserPage userInfo={userInfo} setUserInfo={setUserInfo} />
+                </ShouldRender>
+
                 <ShouldRender shouldRender={page === "offerings"}>
                     <Offerings webRTCConnection={actualPeerConnection} />
                 </ShouldRender>

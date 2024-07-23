@@ -24,7 +24,7 @@ export const D20 = (() => {
     return (
         <Box width={"100%"} alignItems="center" justifyContent="center" onClick={handleClick}>
             <RollingDice imgSrc={d20_blank} rotating={isRolling} diceStyle={componentStyle} onClick={handleClick}/>
-            <Box position="fixed" display={isRolling ? "none" : "flex"} top={"42.5%"}>{value}</Box>
+            <Box position="fixed" display={isRolling ? "none" : "flex"} paddingTop={10} >{value}</Box>
         </Box>
         );
 })
