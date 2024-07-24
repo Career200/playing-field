@@ -1,11 +1,11 @@
 import { RollingDice } from "../../../images/RollingDice";
 import { Box } from "../Box";
 import { useCallback, useState } from "react";
-import { d20Img } from "../../../images/d20Img";
+import { d10Img } from "../../../images/d10Img";
 
-const d20img = d20Img();
+const d10img = d10Img();
 
-export const D20 = (() => {
+export const D10 = (() => {
     const animationTime = 1;
 
     const [value, setValue] = useState<number>(0)
@@ -15,19 +15,19 @@ export const D20 = (() => {
         setIsRolling(true);
 
         setTimeout(() => {
-            setValue(Math.floor(20*Math.random()) + 1);  
+            setValue(Math.floor(10*Math.random()) + 1);  
             setIsRolling(false);
         }, animationTime*1000);
     }, [])
     
     const componentStyle: React.CSSProperties = { 
-        clipPath: "polygon(50% 0%, 94% 28%, 94% 74%, 50% 100%, 6% 74%, 6% 28%)"
+        clipPath: "polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%)"
     }
 
     return (
         <Box width={"100%"} alignItems="center" justifyContent="center" onClick={handleClick}>
-            <RollingDice imgSrc={d20img} animationTime={animationTime} rotating={isRolling} diceStyle={componentStyle} onClick={handleClick}/>
-            <Box position="fixed" display={isRolling ? "none" : "flex"} marginTop={0} >{value}</Box>
+            <RollingDice imgSrc={d10img} animationTime={animationTime} rotating={isRolling} diceStyle={componentStyle} onClick={handleClick}/>
+            <Box position="fixed" display={isRolling ? "none" : "flex"} marginTop={-10} >{value}</Box>
         </Box>
         );
 })

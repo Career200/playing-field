@@ -1,11 +1,11 @@
 import { RollingDice } from "../../../images/RollingDice";
 import { Box } from "../Box";
 import { useCallback, useState } from "react";
-import { d20Img } from "../../../images/d20Img";
+import { d6Img } from "../../../images/d6Img";
 
-const d20img = d20Img();
+const d6img = d6Img();
 
-export const D20 = (() => {
+export const D6 = (() => {
     const animationTime = 1;
 
     const [value, setValue] = useState<number>(0)
@@ -15,7 +15,7 @@ export const D20 = (() => {
         setIsRolling(true);
 
         setTimeout(() => {
-            setValue(Math.floor(20*Math.random()) + 1);  
+            setValue(Math.floor(6*Math.random()) + 1);  
             setIsRolling(false);
         }, animationTime*1000);
     }, [])
@@ -26,8 +26,8 @@ export const D20 = (() => {
 
     return (
         <Box width={"100%"} alignItems="center" justifyContent="center" onClick={handleClick}>
-            <RollingDice imgSrc={d20img} animationTime={animationTime} rotating={isRolling} diceStyle={componentStyle} onClick={handleClick}/>
-            <Box position="fixed" display={isRolling ? "none" : "flex"} marginTop={0} >{value}</Box>
+            <RollingDice imgSrc={d6img} animationTime={animationTime} rotating={isRolling} diceStyle={componentStyle} onClick={handleClick}/>
+            <Box position="fixed" display={isRolling ? "none" : "flex"} marginTop={-40} >{value}</Box>
         </Box>
         );
 })

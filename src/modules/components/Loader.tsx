@@ -1,5 +1,5 @@
 import { keyframes } from "@emotion/react";
-import d20_loader from "../../images/d20_loader.svg"
+import { d20Img } from "../../images/d20Img"
 import { Box } from "./Box";
 import { ShouldRender } from "./ShouldRender";
 import styled from "@emotion/styled";
@@ -22,7 +22,7 @@ export const Loader = ({isLoading}: {isLoading: boolean}) => {
     return (
         <ShouldRender shouldRender={isLoading}>
             <Box justifyContent="center">
-                <RotatingLoaderImg width={100} height={100} src={d20_loader}/>
+                <RotatingLoaderImg width={100} height={100} src={d20Img()}/>
             </Box>
         </ShouldRender>
     )
