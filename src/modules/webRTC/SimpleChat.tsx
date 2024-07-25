@@ -1,35 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Box } from "../components/Box";
 import { ShouldRender } from "../components/ShouldRender";
 import { Answerings } from "./Answerings";
 import { ChatBox } from "./ChatBox";
 import { Offerings } from "./Offerrings";
 import { webRTC_connection } from "./utils/webRTC_class";
-import { Button } from "../components/Button";
-import { T } from "../components/Text";
 import { ChatUserPage, UserInfo } from "./ChatUserPage";
-
-const sidebarButtonProps: React.CSSProperties = {
-    justifyContent: "center",
-    border: "2px solid cadetblue",
-    outline: "1px solid mediumslateblue",
-    background: "lavender ",
-    color: "indianred ",
-    alignItems: "center",
-    borderRadius: 10,
-} 
-
-const textProps: React.CSSProperties = {
-    justifyContent: "center",
-    alignItems: "center",   
-    color: "inherit",
-    transform: "rotate(-90deg)",
-    fontSize: 14,
-    fontFamily: "sans-serif"
-} 
+import { SidebarButton, SidebarPages } from "./SidebarButton";
 
 export const WebRTCChat = () => {
-    const [page, setPage] = useState<string>("user");
+    const [page, setPage] = useState<SidebarPages>("user");
     const [userInfo, setUserInfo] = useState<UserInfo>({ name: "John Doe" });
     const [actualPeerConnection, setActualPeerConnection] = useState<webRTC_connection>();
     
@@ -43,48 +23,50 @@ export const WebRTCChat = () => {
             flexDirection="row"
             width={330}
             height="100%"
-            minHeight={600}
+            minHeight={400}
             gap={12}
         >
-            <Box width={30} flexDirection="column" gap={10} paddingTop={10}>
-                <Button active={page === "user"} mode="switch" onClick={() => setPage("user")} {...sidebarButtonProps} >
-                    <T height={60} {...textProps}>User Page</T>
-                </Button>
-                <Button active={page === "chat"} mode="switch" onClick={() => setPage("chat")} {...sidebarButtonProps} >
-                    <T height={30} {...textProps}>Chat</T>
-                </Button>
-                <Button active={page === "offerings"} mode="switch"  onClick={() => setPage("offerings")} {...sidebarButtonProps} >
-                    <T height={60} {...textProps}>Offering</T>
-                </Button>
-                <Button active={page === "answerings"} mode="switch"  onClick={() => setPage("answerings")} {...sidebarButtonProps} >
-                    <T height={60} {...textProps}>Answering</T>
-                </Button>
+            <Box width={30} flexDirection="column" gap={10} marginRight={-5} paddingTop={10}>  
+                <SidebarButton refPage="user" text="User Page" height={100} page={page} setPage={setPage} />
+                <SidebarButton refPage="chat" text="Chat" height={60} page={page} setPage={setPage} />
+                <SidebarButton refPage="offerings" text="Offering" height={80} page={page} setPage={setPage} />
+                <SidebarButton refPage="answerings" text="Answering" height={80} page={page} setPage={setPage} />
             </Box>
             
             <Box 
-                padding={10}
-                gap={10}
-                flexDirection="column"
+                padding={2}
                 width="100%"
                 background="silver"
                 border = "2px solid cadetblue"
                 outline = "1px solid mediumslateblue"
                 borderRadius={10}
+                zIndex={5}
             >
-                <Box id="userName">{userInfo.name}</Box>
-                <ShouldRender shouldRender={page === "user"}>
-                    <ChatUserPage userInfo={userInfo} setUserInfo={setUserInfo} />
-                </ShouldRender>
+                <Box 
+                    border="1px solid grey"
+                    borderRadius={10}
+                    boxShadow="inset 0px 0px 5px 5px grey"
+                    background="silver"              
+                    width="100%"
+                    padding={8}
+                    gap={10}
+                    flexDirection="column">
 
-                <ShouldRender shouldRender={page === "offerings"}>
-                    <Offerings webRTCConnection={actualPeerConnection} />
-                </ShouldRender>
+                    <Box justifyContent="center" id="userName">{userInfo.name}</Box>
+                    <ShouldRender shouldRender={page === "user"}>
+                        <ChatUserPage userInfo={userInfo} setUserInfo={setUserInfo} />
+                    </ShouldRender>
 
-                <ShouldRender shouldRender={page === "answerings"}>
-                    <Answerings webRTCConnection={actualPeerConnection} />
-                </ShouldRender> 
+                    <ShouldRender shouldRender={page === "offerings"}>
+                        <Offerings webRTCConnection={actualPeerConnection} />
+                    </ShouldRender>
 
-                <ChatBox webRTCConnection={actualPeerConnection} />
+                    <ShouldRender shouldRender={page === "answerings"}>
+                        <Answerings webRTCConnection={actualPeerConnection} />
+                    </ShouldRender> 
+
+                    <ChatBox webRTCConnection={actualPeerConnection} page={page}/>
+                </Box>
             </Box>
         </Box>
     );

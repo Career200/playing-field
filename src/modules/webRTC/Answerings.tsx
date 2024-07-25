@@ -5,6 +5,7 @@ import { ShouldRender } from "../components/ShouldRender";
 import { TextArea } from "../components/TextArea";
 import { webRTC_connection } from "./utils/webRTC_class";
 import { Loader } from "../components/Loader";
+import { handleCopy } from "./utils/handleCopy";
 
 type Props = {
     webRTCConnection: webRTC_connection | undefined;
@@ -57,16 +58,29 @@ export const Answerings = ({ webRTCConnection }: Props) => {
     };
 
     const clickCompleted = async () => {
+        handleCopy(textAreaAnswer.current?.value as string);
         console.info('Completed', webRTCConnection?.dataChannel);
     };
 
     return (
-        <Box flexDirection="column" justifyContent="center">
+        <Box flexDirection="column" fontSize={12} justifyContent="center">
             answering to a connection offer from a peer
             please wait for peer to give offer and paste it below
 
-            <TextArea id="textoffer" placeholder="please paste offer from peer" ref={textAreaOffer}/> 
-            <Button id="buttonofferpasted" onClick={handleOffer} ref={buttonOfferPasted}>offer pasted</Button>
+            <TextArea 
+                id="textoffer" 
+                width="100%"
+                height={40}
+                resize="none"
+                placeholder="please paste offer from peer" 
+                ref={textAreaOffer}/> 
+            <Button 
+                id="buttonofferpasted" 
+                border="lightgrey"
+                boxShadow="inset 0px 0px 5px 5px lightgrey"
+                onClick={handleOffer} 
+                ref={buttonOfferPasted}
+            >offer pasted</Button>
 
             <Loader isLoading={answerLoading}/>
 
@@ -74,17 +88,21 @@ export const Answerings = ({ webRTCConnection }: Props) => {
                 <Box id="spananswer" flexDirection="column" ref={spanAnswer}>
                     please send following answer to peer
                     <TextArea 
-                        id="textanswer" 
+                        id="textAnswer" 
                         readOnly 
                         value={answerText}
+                        width="100%"
+                        height={40}
+                        resize="none"
                         placeholder="please wait a few seconds" 
                         ref={textAreaAnswer}/>
-
-                        <Button 
-                            id="buttonanswerpasted" 
-                            onClick={clickCompleted}
-                            ref={buttonCompleted}
-                        >completed</Button>
+                    <Button 
+                        id="buttonanswerpasted" 
+                        border="lightgrey"
+                        boxShadow="inset 0px 0px 5px 5px lightgrey"
+                        onClick={clickCompleted}
+                        ref={buttonCompleted}
+                    >copy answer</Button>
                 </Box>
 
             </ShouldRender>  

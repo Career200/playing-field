@@ -7,6 +7,7 @@ export type TextAreaProps = Partial<React.PropsWithChildren<React.CSSProperties>
         readOnly?: boolean,
         placeholder?: string,
         value?: string,
+        resize?: string,
         onChange?: (event: React.ChangeEvent) => void,
     } 
     & CommonElementProps;
@@ -37,6 +38,7 @@ export const TextArea = React.forwardRef((
             placeholder={placeholder}
             onChange={onChange}
             onClick={onClick} 
+            contentEditable={false}
             ref={ref}>
                 {children}
         </textarea>

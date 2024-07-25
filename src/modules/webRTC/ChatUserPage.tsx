@@ -26,7 +26,7 @@ export const ChatUserPage = ({ userInfo, setUserInfo }: { userInfo: UserInfo, se
     return (
         <Box flexDirection="column" justifyContent="center" width={"100%"} gap={10}>
             <Box flexDirection="column" width="100%">
-                <T>Your User Name</T>
+                <T justifyContent="center">Your User Name</T>
                 <Input id="chatUserName" type="text" onChange={submitUserData} value={userInfo.name} placeholder="type here" ref={chatUserInputRef} />
             </Box>
         </Box>

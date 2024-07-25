@@ -4,8 +4,9 @@ import { webRTC_connection } from "./utils/webRTC_class";
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";
 import { dataChannelMessage } from "./utils/dataChannelMessage";
+import { ShouldRender } from "../components/ShouldRender";
 
-export const ChatBox = ({ webRTCConnection }: { webRTCConnection: webRTC_connection | undefined }) => {
+export const ChatBox = ({ webRTCConnection, page }: { webRTCConnection: webRTC_connection | undefined, page: string }) => {
 
     const chatLogRef = useRef<HTMLDivElement>(null);
     const chatInputRef = useRef<HTMLInputElement>(null);
@@ -28,7 +29,7 @@ export const ChatBox = ({ webRTCConnection }: { webRTCConnection: webRTC_connect
       }
 
     return (
-        <Box flexDirection="column" justifyContent="center" minHeight={200} height="100%" width={"100%"} gap={10}>
+        <Box flexDirection="column" justifyContent="center" minHeight={100} height="100%" width={"100%"} gap={10}>
             <Box 
                 id="chatlog" 
                 ref={chatLogRef} 
@@ -42,9 +43,18 @@ export const ChatBox = ({ webRTCConnection }: { webRTCConnection: webRTC_connect
                 color="darkblue"
                 fontSize={12}
                 alignItems="center"
+                boxShadow="inset 0px 0px 5px 5px lightgrey, inset 0px 0px 8px 8px grey"
             />
-            <Input id="chatinput" type="text"  placeholder="type here" ref={chatInputRef} />
-            <Button id="chatbutton" onClick={chatbuttonclick} ref={chatButtonRef}>send</Button>
+            <ShouldRender shouldRender={page === "chat"}>
+                <Input id="chatinput" type="text"  placeholder="type here" ref={chatInputRef} />
+                <Button 
+                    id="chatbutton" 
+                    border="lightgrey"
+                    boxShadow="inset 0px 0px 5px 5px lightgrey"
+                    onClick={chatbuttonclick} 
+                    ref={chatButtonRef}
+                >send</Button>
+            </ShouldRender>
         </Box>
     )
 }

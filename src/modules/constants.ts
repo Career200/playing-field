@@ -14,4 +14,5 @@ export const modalProps: React.CSSProperties = {
 
 export const DEFAULT_STYLE: React.CSSProperties = {
     display: "flex",
+    boxSizing: "border-box",
 }
