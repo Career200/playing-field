@@ -1,7 +1,7 @@
 export const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text).then(() => {
-      alert('Текст скопирован в буфер обмена!');
+        console.info('Текст скопирован в буфер обмена!');
     }).catch(err => {
-      alert('Ошибка при копировании: ' + err);
+        console.error('Ошибка при копировании: ' + err);
     });
 };
