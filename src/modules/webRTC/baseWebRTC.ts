@@ -2,7 +2,7 @@ import { chatlog } from "./utils/chatlog";
 import data from "./config.json";
 import { dataChannelMessage } from "./utils/dataChannelMessage";
 import { dataChannelOpen } from "./utils/dataChannelOpen";
-import { handleConnectionStateChange, handleIceConnectionStateChange } from "./utils/logUtils";
+import { doneHandler, failHandler, handleConnectionStateChange, handleIceConnectionStateChange } from "./utils/logUtils";
 
 const configuration = data;
 
@@ -22,8 +22,6 @@ export class webRTC_connection {
 
     /**
      * main method to create P-to-P connection
-     * @param lastIceCandidateHandler 
-     * @returns 
      */
     createPeerConnection = (lastIceCandidateHandler: CandidateHandler) => {
 
@@ -57,48 +55,24 @@ export class webRTC_connection {
     setRemoteDone = async () => {
         try {
             const answer = await this.peerConnection!.createAnswer();
-            this.createAnswerDone(answer);
-            return true;
+            return await this.createAnswerDone(answer);
         } catch (error) {
-            this.createAnswerFailed(error);
-            return false;
+            return failHandler(error, 'Create Answer Failed ');
         }
     };
     
     createAnswerDone = async (answer: RTCLocalSessionDescriptionInit) => {
         try {
             await this.peerConnection!.setLocalDescription(answer);
-            this.setLocalDone();
-            return true;
+            return doneHandler('set Local Done!');
         } catch (error) {
-            this.setLocalFailed(error);
-            return false;
+            return failHandler(error, 'Local Failed ');
         }
     };
-    
-    createAnswerFailed = (reason: unknown) => {
-        console.error('Create Answer Failed ', reason);
-    };
-      
-    setRemoteFailed = (reason: unknown) => {
-        console.error('Remote Failed ', reason);
-        return false;
-    };
-    
-    setLocalDone = () => {
-        console.info('set Local Done!');
-        return true;
-    };
-      
-    setLocalFailed = (reason: unknown) => {
-        console.error('Local Failed ', reason);
-        return false;
-    };
-    
+
     /**
      * method to create offer from offerings
      * @param lastIceCandidateHandler 
-     * @returns 
      */
     createOffer = async (lastIceCandidateHandler: CandidateHandler) => {
         console.info('create Offer Start');    
@@ -114,7 +88,7 @@ export class webRTC_connection {
             const offer = await this.peerConnection.createOffer();
             return await this.createOfferDone(offer);
         } catch (error) {
-            this.createOfferFailed(error);
+            failHandler(error, 'Create Offer Failed...');
             return false;
         }    
     };
@@ -122,23 +96,16 @@ export class webRTC_connection {
     createOfferDone = async (offer: RTCLocalSessionDescriptionInit) => {
         try {
             await this.peerConnection!.setLocalDescription(offer);
-            return this.setLocalDone();
+            return doneHandler('set Local Done!');
         } catch (error) {
-            this.setLocalFailed(error);
-            return false;
+            return failHandler(error, 'Local Failed ');
         }
     };
-    
-    createOfferFailed = (reason: unknown) => {
-        console.error('Create Offer Failed', reason);
-    };
-
 
     /**
      * method to handle offer from other session
      * @param lastIceCandidateHandler 
      * @param offer 
-     * @returns 
      */
     handleOffer = async (lastIceCandidateHandler: CandidateHandler, offer: RTCSessionDescriptionInit) => {
         console.info("Handle Offer Start")
@@ -152,7 +119,7 @@ export class webRTC_connection {
             await this.peerConnection.setRemoteDescription(offer);
             return this.setRemoteDone();
         } catch (error) {
-            return this.setRemoteFailed(error);
+            return failHandler(error, 'Remote Failed...');
         }
     };
 
@@ -173,9 +140,9 @@ export class webRTC_connection {
 
         try {
             await this.peerConnection!.setRemoteDescription(answer);
-            return this.setRemoteDone();
+            return await this.setRemoteDone();
         } catch (error) {
-            return this.setRemoteFailed(error);
+            return failHandler(error, 'Remote Failed...');
         }
     };
 

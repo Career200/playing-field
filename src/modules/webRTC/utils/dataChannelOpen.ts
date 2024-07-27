@@ -5,6 +5,6 @@ import { chatlog } from "./chatlog";
  * @param event 
  */
 export const dataChannelOpen = (event: Event) => {
-    console.log('data channel opened :', event);
+    console.info('data channel opened :', event);
     chatlog('connected', "INFO");
   }

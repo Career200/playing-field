@@ -1,30 +1,9 @@
 import { Box } from "../../components/Box";
 import { Button } from "../../components/Button";
 import { T } from "../../components/Text";
+import { sidebarButtonProps, textProps } from "./styles";
 
 export type SidebarPages = "chat" | "user" | "offerings" | "answerings"
-
-const sidebarButtonProps: React.CSSProperties = {
-    justifyContent: "center",
-    border: "2px solid cadetblue",
-    outline: "1px solid mediumslateblue",
-    borderRight: "none",
-    background: "lavender",
-    color: "indianred ",
-    alignItems: "center",
-    borderRadius: "10px 0px 0px 10px",
-};
-
-const textProps: React.CSSProperties = {
-    justifyContent: "center",
-    alignItems: "center",   
-    color: "inherit",
-    transform: "rotate(-90deg)",
-    fontSize: 12,
-    fontFamily: "sans-serif",
-    whiteSpace: "nowrap",
-    
-};
 
 export const SidebarButton = ({height, text, refPage, page, setPage}: {height: number, text: string, refPage: SidebarPages,  page: SidebarPages, setPage: React.Dispatch<SidebarPages>}) => {
 
@@ -51,7 +30,7 @@ export const SidebarButton = ({height, text, refPage, page, setPage}: {height: n
                 minWidth={5} 
                 height={height}
                 marginLeft={-6.25}
-                background={"silver"}
+                background="silver"
                 border="2px solid cadetblue"
                 borderRight="none"
                 borderLeft="none"
