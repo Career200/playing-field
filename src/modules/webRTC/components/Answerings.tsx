@@ -15,7 +15,7 @@ export const Answerings = ({ webRTCConnection }: Props) => {
     const textAreaOffer = useRef<HTMLTextAreaElement>(null);
     const textAreaAnswer = useRef<HTMLTextAreaElement>(null);
 
-    const [showAnswer, setShowAnswer] = useState<boolean>(false);
+    const [showAnswer, setShowAnswer] = useState<boolean>(true);
     const [answerLoading, setAnswerLoading] = useState<boolean>(false);
     const [answerText, setAnswerText] = useState<string>("");
 
@@ -59,14 +59,14 @@ export const Answerings = ({ webRTCConnection }: Props) => {
             <TextArea 
                 {...textAreaStyle}
                 id="answering-textarea-offer" 
-                readOnly={!answerLoading || !showAnswer}
+                readOnly={answerLoading || !showAnswer}
                 placeholder="please paste offer from peer" 
                 ref={textAreaOffer}/> 
             <Button 
                 {...buttonStyle}
                 id="answering-offer-pasted-button" 
                 onClick={handleOffer} 
-                disabled={!answerLoading || !showAnswer}
+                disabled={answerLoading || !showAnswer}
             >offer pasted</Button>
 
             <Loader isLoading={answerLoading}/>

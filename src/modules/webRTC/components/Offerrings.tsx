@@ -15,7 +15,7 @@ export const Offerings = ({ webRTCConnection }: Props) => {
     const textAreaOffer = useRef<HTMLTextAreaElement>(null);
     const textAreaAnswer = useRef<HTMLTextAreaElement>(null);
  
-    const [showOffer, setShowOffer] = useState<boolean>(false);
+    const [showOffer, setShowOffer] = useState<boolean>(true);
     const [answerProcessed, setAnswerProcessed] = useState<boolean>(false);
     const [offerIsLoading, setOfferIsLoading] = useState<boolean>(false);
     const [offer, setOffer] = useState<string>("")

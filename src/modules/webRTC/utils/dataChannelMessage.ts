@@ -8,7 +8,7 @@ import { chatlog } from "./chatlog";
 export const dataChannelMessage = (message: MessageEvent) => {
     console.info('Message to channel ', message);
     const parsedMessage = JSON.parse(message.data);
-    const userName = parsedMessage.userName || document.getElementById("userName")?.innerHTML as string;
+    const userName = parsedMessage.userName || document.getElementById("user-name")?.innerHTML as string;
     const text = parsedMessage.text;
     chatlog(text, userName);
   }
