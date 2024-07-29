@@ -15,7 +15,7 @@ export const Offerings = ({ webRTCConnection }: Props) => {
     const textAreaOffer = useRef<HTMLTextAreaElement>(null);
     const textAreaAnswer = useRef<HTMLTextAreaElement>(null);
  
-    const [showOffer, setShowOffer] = useState<boolean>(false);
+    const [showOffer, setShowOffer] = useState<boolean>(true);
     const [answerProcessed, setAnswerProcessed] = useState<boolean>(false);
     const [offerIsLoading, setOfferIsLoading] = useState<boolean>(false);
     const [offer, setOffer] = useState<string>("")
@@ -55,7 +55,15 @@ export const Offerings = ({ webRTCConnection }: Props) => {
     }, [webRTCConnection])
 
     return (
-        <Box flexDirection="column" fontSize={12} justifyContent="center">
+        <Box 
+            flexDirection="column" 
+            fontSize={12} 
+            justifyContent="center"
+            background={"silver"}
+            minWidth={300}
+            minHeight={300}
+            height="100%"
+        >
             <Button 
                 {...buttonStyle}
                 id="offering-create-offer-button" 

@@ -15,7 +15,7 @@ export const Answerings = ({ webRTCConnection }: Props) => {
     const textAreaOffer = useRef<HTMLTextAreaElement>(null);
     const textAreaAnswer = useRef<HTMLTextAreaElement>(null);
 
-    const [showAnswer, setShowAnswer] = useState<boolean>(false);
+    const [showAnswer, setShowAnswer] = useState<boolean>(true);
     const [answerLoading, setAnswerLoading] = useState<boolean>(false);
     const [answerText, setAnswerText] = useState<string>("");
 
@@ -52,21 +52,28 @@ export const Answerings = ({ webRTCConnection }: Props) => {
     }, [handleCopy]);
 
     return (
-        <Box flexDirection="column" fontSize={12} justifyContent="center">
+        <Box 
+            flexDirection="column" 
+            fontSize={12} 
+            justifyContent="center"
+            background={"silver"}
+            minWidth={300}
+            minHeight={300}
+        >
             answering to a connection offer from a peer
             please wait for peer to give offer and paste it below
 
             <TextArea 
                 {...textAreaStyle}
                 id="answering-textarea-offer" 
-                readOnly={!answerLoading || !showAnswer}
+                readOnly={answerLoading || !showAnswer}
                 placeholder="please paste offer from peer" 
                 ref={textAreaOffer}/> 
             <Button 
                 {...buttonStyle}
                 id="answering-offer-pasted-button" 
                 onClick={handleOffer} 
-                disabled={!answerLoading || !showAnswer}
+                disabled={answerLoading || !showAnswer}
             >offer pasted</Button>
 
             <Loader isLoading={answerLoading}/>

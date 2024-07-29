@@ -1,4 +1,5 @@
 {
-    "iceServers": [{
-      "urls": "stun:stun.stunprotocol.org"}]
+    "iceServers": [
+      { "urls": "stun:stun.stunprotocol.org" }
+    ]
 }
