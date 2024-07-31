@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "playingfield",
     "public": "dist",
     "ignore": [],
     "rewrites": [
