@@ -1,5 +1,12 @@
 {
-    "iceServers": [
-      { "urls": "stun:stun.stunprotocol.org" }
-    ]
+  "iceServers": [
+    {
+      "urls": "stun:freeturn.net:3479"
+    },
+    {
+      "urls": "turn:freeturn.net:3479",
+      "username": "free",
+      "credential": "free"
+    }
+  ]
 }
