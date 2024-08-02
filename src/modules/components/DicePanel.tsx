@@ -19,10 +19,16 @@ export const DicePanel = () => {
     const windowSize = [window.innerWidth, window.innerHeight]
 
     const addNewDice = useCallback((Dice: JSX.Element) => {
+    
+        addNewItem({ 
+            id: items.length ? +items[items.length-1].id + 1 : 1, 
+            left: (50 - Math.floor(100*Math.random())) + 100, 
+            top: (50 - Math.floor(100*Math.random())) + windowSize[1] - 200, 
+            children: Dice 
+        })
 
-        addNewItem({ id: items.length ? +items[items.length-1].id + 1 : 1, left: 100, top: windowSize[1] - 200, children: Dice })
-
-    }, [items])
+    }, [items]);
+    
     return (
         <Box 
             position="fixed" 
