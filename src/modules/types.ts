@@ -7,10 +7,17 @@ export type DragableItemProps = {
 };
 
 export type DragableContainerProps = 
-    { items: DragableItemProps[], setItems: React.Dispatch<React.SetStateAction<DragableItemProps[]>> }
+    { items: DragableItemProps[], setItems?: React.Dispatch<React.SetStateAction<DragableItemProps[]>> }
 
 export type CommonElementProps = {
     id?: string,
     disabled?: boolean,
     onClick?: (event: React.MouseEvent) => void;
 }
+
+export type StoreType = { 
+    items: DragableItemProps[], 
+    addNewItem: (props: DragableItemProps) => void,
+    updateItems: ({ id, left, top }: DragableItemProps) => void,
+    removeItems: () => void,
+};

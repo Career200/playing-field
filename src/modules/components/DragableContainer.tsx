@@ -1,22 +1,14 @@
 import { DraggableItem } from './DragableItem';
-import { DragableContainerProps, DragableItemProps } from '../types';
+import { DragableContainerProps, DragableItemProps, StoreType } from '../types';
+import { useStore } from './ZutandStore';
 
-export const DragableContainer = ({ items, setItems } : DragableContainerProps) => {
-
-  const moveItem = ({id, left = 0, top = 0}: Partial<DragableItemProps>) => {
-    setItems((prevItems) =>
-    {
-      return prevItems.map((item) =>
-        item.id === id ? { ...item, left, top } : item
-      )
-    }
-    );
-  };
+export const DragableContainer = ({ } : DragableContainerProps) => {
+const items = useStore((state: StoreType) => state.items)
 
   return (
     <>
       {items.map((item: DragableItemProps) => (
-        <DraggableItem key={item.id} id={item.id} left={item.left} top={item.top} children={item.children} moveItem={moveItem} />
+        <DraggableItem key={item.id} id={item.id} left={item.left} top={item.top} children={item.children} />
       ))}
     </>
   );

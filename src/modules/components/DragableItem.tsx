@@ -1,9 +1,11 @@
 import { useRef } from 'react';
 import { useDrag } from 'react-dnd';
-import { DragableItemProps } from '../types';
+import { DragableItemProps, StoreType } from '../types';
+import { useStore } from './ZutandStore';
 
-export const DraggableItem = ({ id, children, left, top, moveItem = () => {} } : DragableItemProps) => {
+export const DraggableItem = ({ id, children, left, top } : DragableItemProps) => {
     const ref = useRef(null);
+    const moveItem = useStore((state: StoreType) => state.updateItems)
   
     const [{ isDragging }, drag] = useDrag({
       type: 'item',
@@ -18,7 +20,7 @@ export const DraggableItem = ({ id, children, left, top, moveItem = () => {} } :
           const delta = monitor.getDifferenceFromInitialOffset() || { x: 0, y: 0 };
           const newLeft = Math.round(item.left + delta.x);
           const newTop = Math.round(item.top + delta.y);
-          moveItem({ id: item.id, left: newLeft, top: newTop});
+          moveItem({ id: item.id, left: newLeft, top: newTop });
         }
       },
     });
