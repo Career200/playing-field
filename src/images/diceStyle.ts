@@ -5,3 +5,4 @@ export const polygonStyle: React.CSSProperties = {
     strokeLinejoin: "round",
     opacity: "0.2"
   };
+  

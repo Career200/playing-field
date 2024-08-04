@@ -1,11 +1,11 @@
 import { useRef } from 'react';
 import { useDrag } from 'react-dnd';
-import { DragableItemProps, StoreType } from '../types';
+import { DragableItemProps, DragableStoreType } from '../types';
 import { useStore } from './ZutandStore';
 
 export const DraggableItem = ({ id, children, left, top } : DragableItemProps) => {
     const ref = useRef(null);
-    const moveItem = useStore((state: StoreType) => state.updateItems)
+    const moveItem = useStore((state: DragableStoreType) => state.updateItems)
   
     const [{ isDragging }, drag] = useDrag({
       type: 'item',

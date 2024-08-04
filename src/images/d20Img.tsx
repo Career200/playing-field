@@ -1,13 +1,9 @@
+import { polygonStyle } from "./diceStyle";
 import { styleToString } from "./styleToString";
+import { DiceImg } from "./types";
 
-export const d20Img = (): string => {
-  const polygonStyle: React.CSSProperties = {
-    fill: "#eee",
-    stroke: "#222",
-    strokeWidth: "1px",
-    strokeLinejoin: "round",
-    opacity: "0.2"
-  };
+export const d20Img = (): DiceImg => {
+  const fontSize = 20;
 
   const svgString = `
     <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -24,5 +20,10 @@ export const d20Img = (): string => {
     </svg>
   `;
 
-  return `data:image/svg+xml;base64,${btoa(svgString)}`;
+  return [
+    `data:image/svg+xml;base64,${btoa(svgString)}`,
+    "polygon(50% 0%, 94% 28%, 94% 74%, 50% 100%, 6% 74%, 6% 28%)",
+    0,
+    fontSize
+  ];
 };

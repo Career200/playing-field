@@ -1,7 +1,10 @@
 import { polygonStyle } from "./diceStyle";
 import { styleToString } from "./styleToString";
+import { DiceImg } from "./types";
 
-export const d8Img = (): string => {
+export const d8Img = (): DiceImg => {
+  const fontSize = 24;
+
   const svgString = `
     <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
       <polygon style="${styleToString(polygonStyle)}" points="6 74 94 73.5 50 1"/>
@@ -11,5 +14,10 @@ export const d8Img = (): string => {
     </svg>
   `;
 
-  return `data:image/svg+xml;base64,${btoa(svgString)}`;
+  return [
+    `data:image/svg+xml;base64,${btoa(svgString)}`,
+    "polygon(50% 0%, 94% 28%, 94% 74%, 50% 100%, 6% 74%, 6% 28%)",
+    0,
+    fontSize
+  ];
 };

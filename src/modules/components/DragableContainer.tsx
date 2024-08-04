@@ -1,9 +1,9 @@
 import { DraggableItem } from './DragableItem';
-import { DragableContainerProps, DragableItemProps, StoreType } from '../types';
+import { DragableItemProps, DragableStoreType } from '../types';
 import { useStore } from './ZutandStore';
 
-export const DragableContainer = ({ } : DragableContainerProps) => {
-const items = useStore((state: StoreType) => state.items)
+export const DragableContainer = () => {
+  const items = useStore((state: DragableStoreType) => state.items)
 
   return (
     <>
