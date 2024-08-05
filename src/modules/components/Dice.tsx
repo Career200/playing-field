@@ -1,12 +1,7 @@
-import { RollingDice } from "../../images/RollingDice";
+import { RollingDice } from "@images/RollingDice";
 import { Box } from "./Box";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { d4Img } from "../../images/d4Img";
-import { d6Img } from "../../images/d6Img";
-import { d8Img } from "../../images/d8Img";
-import { d10Img } from "../../images/d10Img";
-import { d12Img } from "../../images/d12Img";
-import { d20Img } from "../../images/d20Img";
+import { d10Img, d12Img, d20Img, d4Img, d6Img, d8Img } from "@images/index";
 import { useDice } from "./ZutandStore";
 import { DiceStoreType, DiceType } from "../types";
 
