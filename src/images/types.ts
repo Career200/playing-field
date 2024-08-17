@@ -1,0 +1,1 @@
+export type DiceImg = [string, string, number, number];
