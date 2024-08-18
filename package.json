@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "host": "tsc && vite build && firebase deploy --only hosting:playingfield",
     "prepare": "husky",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "prettierCheck": "prettier --check ."
   },
   "dependencies": {
     "@emotion/react": "^11.13.0",
