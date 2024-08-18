@@ -1,7 +1,10 @@
 export const handleCopy = (text: string) => {
-    navigator.clipboard.writeText(text).then(() => {
-        console.info('copied');
-    }).catch(err => {
-        console.error('copy error' + err);
+  navigator.clipboard
+    .writeText(text)
+    .then(() => {
+      console.info("copied");
+    })
+    .catch((err) => {
+      console.error("copy error" + err);
     });
 };
