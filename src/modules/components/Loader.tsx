@@ -1,5 +1,5 @@
 import { keyframes } from "@emotion/react";
-import { d20Img } from "../../images/d20Img";
+import { d20Img } from "../../images/d20Img"
 import { Box } from "./Box";
 import { ShouldRender } from "./ShouldRender";
 import styled from "@emotion/styled";
@@ -14,15 +14,16 @@ const rotateLoader = keyframes`
 `;
 
 export const RotatingLoaderImg = styled.img`
-  animation: ${rotateLoader} 2s linear infinite;
+    animation: ${rotateLoader} 2s linear infinite;
 `;
 
-export const Loader = ({ isLoading }: { isLoading: boolean }) => {
-  return (
-    <ShouldRender shouldRender={isLoading}>
-      <Box justifyContent="center">
-        <RotatingLoaderImg width={100} height={100} src={d20Img()} />
-      </Box>
-    </ShouldRender>
-  );
+export const Loader = ({isLoading}: {isLoading: boolean}) => {
+
+    return (
+        <ShouldRender shouldRender={isLoading}>
+            <Box justifyContent="center">
+                <RotatingLoaderImg width={100} height={100} src={d20Img()}/>
+            </Box>
+        </ShouldRender>
+    )
 };
