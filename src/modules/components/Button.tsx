@@ -7,7 +7,7 @@ export type ButtonModes = "tact" | "pressable" | "switch"
 
 export type ButtonProps = Partial<React.PropsWithChildren<React.CSSProperties>> & { active?: boolean } &CommonElementProps;
 
-type StyledButtonProps = { 
+export type StyledButtonProps = { 
     pressed?: boolean, 
     mode?: ButtonModes, 
     hoverBg?: string,
@@ -47,10 +47,11 @@ export const Button = React.forwardRef(
         activeBg,
         hoverBg,
         activeHoverBg,
+        pressed,
         ...props 
     } : ButtonProps & StyledButtonProps, ref: React.ForwardedRef<HTMLButtonElement> ) => {
     const componentStyle = { ...DEFAULT_STYLE, ...props}
-    const [pressed, setPressed] = useState<boolean>(false);
+    const [isPressed, setPressed] = useState<boolean>(!!pressed);
 
     useEffect(() => {
         if (mode === "switch") setPressed(active);
@@ -59,23 +60,23 @@ export const Button = React.forwardRef(
     const handleMouseDown = useCallback((event: React.MouseEvent) => {
         event.preventDefault();
         if (mode === "tact") setPressed(true);
-    }, [pressed, mode]);
+    }, [isPressed, mode]);
 
     const handleMouseUp = useCallback((event: React.MouseEvent) => {
         event.preventDefault();
         if (mode === "tact") setPressed(false);
-    }, [pressed, mode])
+    }, [isPressed, mode])
 
     const handleClick = useCallback((event: React.MouseEvent) => {
-        if (mode === "pressable") setPressed(!pressed);
+        if (mode === "pressable") setPressed(!isPressed);
         onClick?.(event)
-    }, [onClick, mode, pressed]);
+    }, [onClick, mode, isPressed]);
 
 
     return (
         <$button 
             mode={mode} 
-            pressed={pressed} 
+            pressed={isPressed} 
             id={id} 
             background={background}
             color={color}

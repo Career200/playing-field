@@ -52,7 +52,14 @@ export const Answerings = ({ webRTCConnection }: Props) => {
     }, [handleCopy]);
 
     return (
-        <Box flexDirection="column" fontSize={12} justifyContent="center">
+        <Box 
+            flexDirection="column" 
+            fontSize={12} 
+            justifyContent="center"
+            background={"silver"}
+            minWidth={300}
+            minHeight={300}
+        >
             answering to a connection offer from a peer
             please wait for peer to give offer and paste it below
 

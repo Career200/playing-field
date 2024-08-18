@@ -55,7 +55,15 @@ export const Offerings = ({ webRTCConnection }: Props) => {
     }, [webRTCConnection])
 
     return (
-        <Box flexDirection="column" fontSize={12} justifyContent="center">
+        <Box 
+            flexDirection="column" 
+            fontSize={12} 
+            justifyContent="center"
+            background={"silver"}
+            minWidth={300}
+            minHeight={300}
+            height="100%"
+        >
             <Button 
                 {...buttonStyle}
                 id="offering-create-offer-button" 
