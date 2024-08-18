@@ -6,7 +6,7 @@ export const d20Img = (): string => {
     stroke: "#222",
     strokeWidth: "1px",
     strokeLinejoin: "round",
-    opacity: "0.2"
+    opacity: "0.2",
   };
 
   const svgString = `

@@ -8,104 +8,110 @@ import { webRTC_connection } from "../baseWebRTC";
 import { handleCopy } from "../utils/handleCopy";
 import { buttonStyle, textAreaStyle } from "./styles";
 
-type Props = { webRTCConnection: webRTC_connection | undefined }
+type Props = { webRTCConnection: webRTC_connection | undefined };
 
 export const Offerings = ({ webRTCConnection }: Props) => {
+  const textAreaOffer = useRef<HTMLTextAreaElement>(null);
+  const textAreaAnswer = useRef<HTMLTextAreaElement>(null);
 
-    const textAreaOffer = useRef<HTMLTextAreaElement>(null);
-    const textAreaAnswer = useRef<HTMLTextAreaElement>(null);
- 
-    const [showOffer, setShowOffer] = useState<boolean>(true);
-    const [answerProcessed, setAnswerProcessed] = useState<boolean>(false);
-    const [offerIsLoading, setOfferIsLoading] = useState<boolean>(false);
-    const [offer, setOffer] = useState<string>("")
-    
-    const createOffer = useCallback(async() => {
-        console.info('create Offer...');   
-        
-        const offerCreated = await webRTCConnection?.createOffer(lastIceCandidate);
-        if (!offerCreated) return;
+  const [showOffer, setShowOffer] = useState<boolean>(true);
+  const [answerProcessed, setAnswerProcessed] = useState<boolean>(false);
+  const [offerIsLoading, setOfferIsLoading] = useState<boolean>(false);
+  const [offer, setOffer] = useState<string>("");
 
-        setShowOffer(false)
-        setOfferIsLoading(true)
-        console.info('Create Offer Done');
-    }, [setShowOffer, setOfferIsLoading, webRTCConnection]);
+  const createOffer = useCallback(async () => {
+    console.info("create Offer...");
 
-    const lastIceCandidate = useCallback((peerConnection: RTCPeerConnection | null) => {
-        console.info('Last Ice Candidate', peerConnection);
+    const offerCreated = await webRTCConnection?.createOffer(lastIceCandidate);
+    if (!offerCreated) return;
 
-        const offer = peerConnection?.localDescription;
-        if (!offer) return;
-        setOffer(JSON.stringify(offer));
+    setShowOffer(false);
+    setOfferIsLoading(true);
+    console.info("Create Offer Done");
+  }, [setShowOffer, setOfferIsLoading, webRTCConnection]);
 
-        setShowOffer(true);
-        setOfferIsLoading(false);
-        console.info("Offer Processed");
-    }, [setOffer, setShowOffer, setOfferIsLoading])
+  const lastIceCandidate = useCallback(
+    (peerConnection: RTCPeerConnection | null) => {
+      console.info("Last Ice Candidate", peerConnection);
 
-    const clickAnswerPasted = useCallback(async() => {
-        try {
-            const answer = JSON.parse(textAreaAnswer.current!.value);
-            const answerDone = await webRTCConnection!.handleAnswer(answer);
-            setAnswerProcessed(answerDone);
-            console.info('Answer Pasted');
-        } catch (error) {
-            console.error("failed to process:", error)
-        }
-    }, [webRTCConnection])
+      const offer = peerConnection?.localDescription;
+      if (!offer) return;
+      setOffer(JSON.stringify(offer));
 
-    return (
-        <Box 
-            flexDirection="column" 
-            fontSize={12} 
-            justifyContent="center"
-            background={"silver"}
-            minWidth={300}
-            minHeight={300}
-            height="100%"
-        >
-            <Button 
-                {...buttonStyle}
-                id="offering-create-offer-button" 
-                onClick={createOffer}
-                disabled={!showOffer}
-            >Create Offer</Button>
+      setShowOffer(true);
+      setOfferIsLoading(false);
+      console.info("Offer Processed");
+    },
+    [setOffer, setShowOffer, setOfferIsLoading],
+  );
 
-            <Loader isLoading={offerIsLoading}/>
+  const clickAnswerPasted = useCallback(async () => {
+    try {
+      const answer = JSON.parse(textAreaAnswer.current!.value);
+      const answerDone = await webRTCConnection!.handleAnswer(answer);
+      setAnswerProcessed(answerDone);
+      console.info("Answer Pasted");
+    } catch (error) {
+      console.error("failed to process:", error);
+    }
+  }, [webRTCConnection]);
 
-            <ShouldRender shouldRender={showOffer}>
-                <Box id="offering-span-offer" flexDirection="column" padding={10}>
-                    please copy the offer below and send it to a peer.
-                    <TextArea 
-                        {...textAreaStyle}
-                        id="offering-textarea-offer" 
-                        readOnly 
-                        value={offer}
-                        placeholder="please wait a few seconds" 
-                        ref={textAreaOffer}
-                    />
+  return (
+    <Box
+      flexDirection="column"
+      fontSize={12}
+      justifyContent="center"
+      background={"silver"}
+      minWidth={300}
+      minHeight={300}
+      height="100%"
+    >
+      <Button
+        {...buttonStyle}
+        id="offering-create-offer-button"
+        onClick={createOffer}
+        disabled={!showOffer}
+      >
+        Create Offer
+      </Button>
 
-                    <Button 
-                        {...buttonStyle}
-                        id="offering-offer-copy-button" 
-                        onClick={() => handleCopy(textAreaOffer.current?.value as string)} 
-                    >copy offer</Button>
+      <Loader isLoading={offerIsLoading} />
 
-                    please wait for peer to give answer and paste it below
-
-                    <TextArea 
-                        {...textAreaStyle}
-                        id="offering-answer-text-area" 
-                        placeholder="please paste answer from peer"
-                        ref={textAreaAnswer}/>
-                    <Button 
-                        {...buttonStyle}
-                        id="offering-answer-pasted-button" 
-                        onClick={clickAnswerPasted}
-                        disabled={answerProcessed}
-                    >answer pasted</Button>
-                </Box>
-            </ShouldRender>
+      <ShouldRender shouldRender={showOffer}>
+        <Box id="offering-span-offer" flexDirection="column" padding={10}>
+          please copy the offer below and send it to a peer.
+          <TextArea
+            {...textAreaStyle}
+            id="offering-textarea-offer"
+            readOnly
+            value={offer}
+            placeholder="please wait a few seconds"
+            ref={textAreaOffer}
+          />
+          <Button
+            {...buttonStyle}
+            id="offering-offer-copy-button"
+            onClick={() => handleCopy(textAreaOffer.current?.value as string)}
+          >
+            copy offer
+          </Button>
+          please wait for peer to give answer and paste it below
+          <TextArea
+            {...textAreaStyle}
+            id="offering-answer-text-area"
+            placeholder="please paste answer from peer"
+            ref={textAreaAnswer}
+          />
+          <Button
+            {...buttonStyle}
+            id="offering-answer-pasted-button"
+            onClick={clickAnswerPasted}
+            disabled={answerProcessed}
+          >
+            answer pasted
+          </Button>
         </Box>
-    );
-}
+      </ShouldRender>
+    </Box>
+  );
+};
